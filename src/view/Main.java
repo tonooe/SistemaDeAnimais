@@ -27,7 +27,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o tipo de animal que deseja buscar (Cachorro/Gato):  ");
+                    System.out.println("Digite o tipo de animal: (Cachorro/Gato):  ");
                     String tipo = scanner.nextLine();
                     System.out.print("Nome: ");
                     String nome = scanner.nextLine();
@@ -39,7 +39,7 @@ public class Main {
                     System.out.print("Cor: ");
                     String cor = scanner.nextLine();
 
-                    Animal animal; //aqui vai verificar a escolha do usuário e comparar, se for cachorro, vai criar um objeto cachorro()
+                    Animal animal = null; //aqui vai verificar a escolha do usuário e comparar, se for cachorro, vai criar um objeto cachorro()
                     if (tipo.equalsIgnoreCase("Cachorro")) {
                         animal = new Cachorro();
                     } else if (tipo.equalsIgnoreCase("Gato")) {
@@ -54,7 +54,52 @@ public class Main {
                     animal.setCor(cor);
                     petShop.cadastrarAnimal(animal);
                     break;
+
+                case 2:
+                    petShop.listarAnimais();
+                    break;
+
+                case 3:
+                    System.out.println("Digite o nome do animal: ");
+                    String nomeBusca = scanner.nextLine(); // o scanner.nextLine le o que foi digitado acima e salva na variável nomeBusca
+                    Animal animalEncontrado = petShop.buscarAnimalPorNome(nomeBusca); // nomeBusca é o nome q o usuario digitou, e o petShop.buscarAnimalPorNome chama o método q busca esse nome na lista de animais do petshop
+                    // animal animalEncontrado = > guarda o resultado da busca na variável animalEncontrado
+                    if (animalEncontrado != null) { // se o animal for encontrado, vai imprimir na tela abaixo
+                        System.out.println("Animal encontrado: " + animalEncontrado);
+                    } else {
+                        System.out.println("Animal não encontrado.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Digite o nome do animal para remover: ");
+                    String nomeRemover = scanner.nextLine(); // mesmo processo, scanner.nextline vai esperar o que foi digitado acima e vai guardar na variaver nomeRemover
+                    petShop.removerAnimal(nomeRemover); // vai chamar o metodo pra remover o animal que foi digitado no nomeRemover
+                    break;
+
+                case 5:
+                    System.out.print("Digite o nome do animal para atualizar: ");
+                    String nomeAtualizar = scanner.nextLine();
+                    System.out.print("Atualizar raça: ");
+                    String novaRaca = scanner.nextLine();
+                    System.out.print("Atualizar idade: ");
+                    int novaIdade = scanner.nextInt();
+                    scanner.nextLine(); // limpa o buffer
+                    System.out.print("Atualizar cor: ");
+                    String novaCor = scanner.nextLine();
+
+                    petShop.atualizarAnimal(nomeAtualizar, novaRaca, novaIdade, novaCor);
+                    break;
+
+                case 0:
+                    System.out.println("Saindo do Sistema...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
             }
-        }
+        } while (opcao != 0);
+
+        scanner.close();
     }
 }

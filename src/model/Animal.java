@@ -6,6 +6,13 @@ public abstract class Animal {
     private String raca;
     private String cor;
 
+    public Animal(String nome, int idade, String raca, String cor) {
+        this.nome = nome;
+        this.idade = idade;
+        this.raca = raca;
+        this.cor = cor;
+    }
+
     public String getNome() {
         return nome;
     }
